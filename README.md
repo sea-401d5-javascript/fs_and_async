@@ -1,4 +1,4 @@
-#FS and Async DUE: April 7, 2016 by 1pm (class start)
+#FS and Async
 
 ##To Submit this Assignment
   * fork this repository
