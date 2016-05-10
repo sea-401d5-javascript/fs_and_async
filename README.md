@@ -13,11 +13,9 @@ log the first 8 bytes in hex of each file.
 Also, you must guarantee that three files are read and console logged in the 
 order `'one.txt', 'two.txt', 'three.txt'` regardless of file size. 
 
-You can use any method of handling async except nested callback. For a bonus
-point don't use event emitters either. 
+You can use any method of handling async except nested callback.
 
-You will also need to look up and implement async testing, making sure that
-you are not getting "false positives"(tests that are passing but shouldn't be).
+Some possible methods include: event emitters, promises, or async handling libraries.
 
 ##Rubric:
   * Async Handling: 4pts
