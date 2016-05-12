@@ -1,17 +1,12 @@
 'use strict'
 
-module.exports = module = {};
-
 const fs = require('fs');
 const async = require('async');
 const filePaths = ['./files/one.txt', './files/two.txt', './files/three.txt'];
 
-
-var mapped = async.map(filePaths, readFile, function(err, files) {
+async.map(filePaths, fs.readFile, function(err, file) {
   if (err) console.log(err);
-  console.log(files);
-})
-
-var readFile = fs.readFile(file, function(callback) {
-  console.log(file.toString('hex', 0, 8));
+  file.forEach((buffer) => {
+    console.log(buffer.toString('hex', 0, 8));
   })
+})
