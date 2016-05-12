@@ -1,0 +1,6 @@
+The Warriors are playing basketball right now
+I'm trying to make this file somewhat bigger than the rest to really test the async.....is that possible?
+I don't know. We'll see. It should take longer to read this file.
+GKLBDKLSLGBDBSLGBJLDJBG
+LJGSDLKGNKNGLSNGKnd
+SDKGNKSDNGn
