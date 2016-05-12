@@ -10,7 +10,9 @@ ee.on('check-and-log', (data) => {
   if (Object.keys(output).length == files.length) {
     for (i = 1; i < Object.keys(output).length + 1; i++) {
       logger = logger + output[i].slice(0, 8).toString('hex') + "\n"
+
     }
+console.log(logger);
   }
 })
 
@@ -30,4 +32,4 @@ loadfiles = function (f) {
   })
 }
 
-//loadfiles(files);
+loadfiles(files);
