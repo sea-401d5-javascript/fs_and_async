@@ -1,2 +1,9 @@
 const expect = require('chai').expect;
-const greet = require('../read_file.js')
+const readFile = require('../read_file.js');
+
+
+describe('async test', () => {
+  it('async working', () => {
+    expect(readFile.fileContent).to.eql('adsf');
+  })
+});
