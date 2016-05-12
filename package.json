@@ -1,0 +1,30 @@
+{
+  "name": "dstineback",
+  "version": "1.0.0",
+  "description": "class-03 lab",
+  "main": "file-async.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dstineback/fs_and_async.git"
+  },
+  "author": "me",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dstineback/fs_and_async/issues"
+  },
+  "homepage": "https://github.com/dstineback/fs_and_async#readme",
+  "devDependencies": {
+    "async": "^2.0.0-rc.4",
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "mocha": "^2.4.5"
+  }
+}
