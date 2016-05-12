@@ -1,8 +1,8 @@
 const expect = require('chai').expect
-const text = require('../../file-async')
+const text = require('../file-async')
 
 describe('text test', () => {
-  if('test should log first 8 bites', (done) => {
+  it('test should log first 8 bites', (done) => {
     expect(text()).to.eql('hex');
     done();
   })

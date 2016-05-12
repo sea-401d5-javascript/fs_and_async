@@ -3,6 +3,7 @@ const EventEmitter = require('events').EventEmitter;
 const ee = new EventEmitter();
 
 
+
 fs.readFile('./one.txt', (err, data) => {
   console.log(data.toString('hex',0,8));
   ee.emit('file-two', data);
