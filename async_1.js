@@ -1,38 +1,46 @@
 'use strict';
-const async_1 = exports = module.exports;
+
 const fs = require('fs');
-const files = ['one.txt', 'two.txt', 'three.txt'];
 const EventEmitter = require('events').EventEmitter;
 const ee = new EventEmitter();
-var testOrder = [];
+// var testOrder = [];
+var reader = module.exports = function(cb){
+  let files = []
 
-fs.readFile('./one.txt', (err, data) => {
-  console.log(data.toString('hex', 0, 8))
-  testOrder.push(1)
-  ee.emit('two');
-})
-
-ee.on('two', () => {
-  fs.readFile('./two.txt', (err, data) => {
-    console.log(data.toString('hex', 0, 8))
-    testOrder.push(2)
-    ee.emit('three')
+  fs.readFile(__dirname + '/one.txt', (err, data) => {
+    // console.log(data.toString('hex', 0, 8))
+    files.push(data.slice(0, 8))
+    // testOrder.push(1)
+    ee.emit('two');
   })
 
-})
+  ee.on('two', () => {
+    fs.readFile(__dirname + '/two.txt', (err, data) => {
+      // console.log(data.toString('hex', 0, 8))
+      files.push(data.slice(0, 8))
+      // testOrder.push(2)
+      ee.emit('three')
+    })
 
-ee.on('three', () => {
-  fs.readFile('./three.txt', (err, data) => {
-    console.log(data.toString('hex', 0, 8))
-    testOrder.push(3);
-    ee.emit('woop!');
   })
-})
 
-async_1.reportShit = function(){
-  console.log('hey')
-  return testOrder;
+  ee.on('three', () => {
+    fs.readFile(__dirname + '/three.txt', (err, data) => {
+      // console.log(data.toString('hex', 0, 8))
+      files.push(data.slice(0, 8))
+      // testOrder.push(3);
+      cb(files);
+    })
+  })
 }
+
+reader((files) => {
+  console.log(files)
+})
+
+//return testOrder;
+
+
 
 
 //======= looped solution to work on later
