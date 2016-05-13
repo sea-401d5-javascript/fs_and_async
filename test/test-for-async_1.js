@@ -1,6 +1,6 @@
 'use strict';
 const expect = require('chai').expect;
-const async_1 = require('../async_1');
+const reader = require('../async_1');
 const fs = require('fs');
 
 
@@ -12,8 +12,9 @@ describe('file read tests', () => {
       files.push(data.slice(0,8))
       fs.readFile(__dirname + '/../two.txt', (err, data) => {
         files.push(data.slice(0,8))
-        fs.readFile(__dirname + '/../two.txt', (err, data) => {
+        fs.readFile(__dirname + '/../three.txt', (err, data) => {
           files.push(data.slice(0,8))
+          done()
         })
       })
     })
@@ -25,8 +26,8 @@ describe('file read tests', () => {
     })
   })
   it('should read files', (done) => {
-    reader((files) => {
-      expect(Buffer.isBuffer(files[0])).to.eql(true);
+    reader((data) => {
+      expect(data[0] instanceof Buffer).to.eql(true);
       done();
     })
   })
