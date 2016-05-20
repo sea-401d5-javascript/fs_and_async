@@ -1,32 +1,24 @@
 'use strict';
 
-const async = require('async');
+const fs = require('fs');
+const Buffer = require('buffer').Buffer;
 const mocha = require('mocha');
 const expect = require('chai').expect;
-
-//Test doesn't work... I'm pretty sure that I'm not using the done callback correctly and I'm pretty sure my transformArray function is completely messed up.. haha.
+const readFile = require('../readFile');
+let file1 = 'first sample text';
+let file2 = 'second sample text';
+let file3 = 'third sample text';
+let testFiles = [file1, file2, file3];
+let testFilePaths = [__dirname + '/../files/0.txt', __dirname + '/../files/1.txt', __dirname + '/../files/2.txt']
 
 describe('File reading tests', () => {
-  it('should return data in the correct order every time', (done) => {
-    let exampleArray = [['first array', 'more data'], ['second array', 'data'], ['third array', 'the most data']];
-    let results = [];
-    let count = 0;
-
-    function transformArray(array, callback) {
-      console.log('simulating asynch');
-      setTimeout(() => {
-        count++;
-        if (count === 3) done();
-        callback(array.reverse());
-      }, 1000);
-
-    }
-    expect(async.map(exampleArray, transformArray, (err, data) => {
-      if (err) console.log(err);
-      console.log(data);
-      data.forEach((array) => {
-        results.push(data);
-      })
-    })).to.eql(['first array', 'second array', 'third array']);
+  before('writing files' , () => {
+    testFiles.forEach((file) => {
+      fs.writeFileSync(__dirname + '/../files/' + testFiles.indexOf(file) + '.txt', file);
+    })
   })
-})
+  it('should return data in the correct order every time', (done) => {
+    let result = readFile(testFilePaths, fs.readFile, 'utf8', done);
+    expect(readFile(testFilePaths, fs.readFile, 'utf8')).to.eql('firststringmoredatalotsofdata');
+  });
+});
