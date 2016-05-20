@@ -32,5 +32,4 @@ var mainReader = module.exports = function(cb) {
 mainReader((finalArray) => {
   return finalArray;
 })
-
 debugger;

@@ -30,9 +30,9 @@ describe('readFile processes', () => {
     });
   });
 
-  it('should keep files in correct order', (done) => {
+  it('should keep files in correct order', () => {
     mainReader((data) => {
-      expect(data[0].toString()).to.eql(files[0].toString());
+      expect(mainReader.finalArray).to.eql('abc');
     });
   });
 });
