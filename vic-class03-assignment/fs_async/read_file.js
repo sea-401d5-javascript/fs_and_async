@@ -1,11 +1,10 @@
 'use strict'
 
 const fs = require('fs');
-const EventEmitter = require('events').EventEmitter;
+const EventEmitter = require('events');
 const ee = new EventEmitter();
 
-var reader = module.exports;
-reader = function(cb) {
+var reader = module.exports = function(cb) {
   let files = [];
 
   var fileText;
@@ -18,7 +17,7 @@ reader = function(cb) {
 
   ee.on('Hex-one', (data) => {
     console.log('Hex-one ' + data);
-    fs.readFile('./two.txt', (err, data) => {
+    fs.readFile(__dirname + '/two.txt', (err, data) => {
 
       fileText = data.toString('hex', 0, 8);
       files.push(fileText);
@@ -28,7 +27,7 @@ reader = function(cb) {
 
   ee.on('Hex-two', (data) => {
     console.log('Hex-two ' + data);
-    fs.readFile('./three.txt', (err, data) => {
+    fs.readFile(__dirname + '/three.txt', (err, data) => {
       if (err) {console.log(err);
       }
 
@@ -43,4 +42,4 @@ reader = function(cb) {
   })
 }
 
-reader(function(fT){console.log(fT)});
+// reader(function(fT){});
