@@ -1,0 +1,22 @@
+{
+  "name": "async",
+  "version": "0.1.0",
+  "description": "Testing async calls",
+  "main": "event_emitter.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kevin Chuang",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^2.9.0",
+    "mocha": "^2.4.5"
+  },
+  "dependencies": {
+    "async": "^2.0.0-rc.4"
+  }
+}
