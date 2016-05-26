@@ -1,0 +1,27 @@
+{
+  "name": "stefanie-hansen",
+  "version": "1.0.0",
+  "description": "##To Submit this Assignment   * fork this repository   * write all of your code in a folder containing your name   * push to your repository   * submit a pull request to this repository   * submit a link to your PR in canvas",
+  "main": "readFile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {
+    "async": "^2.0.0-rc.4",
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefuhnee/fs_and_async.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stefuhnee/fs_and_async/issues"
+  },
+  "homepage": "https://github.com/stefuhnee/fs_and_async#readme"
+}
