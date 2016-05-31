@@ -1,24 +1,38 @@
 'use strict';
 
 const fs = require('fs');
-const Buffer = require('buffer').Buffer;
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const readFile = require('../readFile');
-let file1 = 'first sample text';
-let file2 = 'second sample text';
-let file3 = 'third sample text';
-let testFiles = [file1, file2, file3];
-let testFilePaths = [__dirname + '/../files/0.txt', __dirname + '/../files/1.txt', __dirname + '/../files/2.txt']
+const eventEmitter = require('events');
+const emitter = new eventEmitter();
+const filePaths = [__dirname + '/../files/one.txt', __dirname + '/../files/two.txt', __dirname + '/../files/three.txt'];
+let fileArr = [];
+let fileString = '';
 
 describe('File reading tests', () => {
-  before('writing files' , () => {
-    testFiles.forEach((file) => {
-      fs.writeFileSync(__dirname + '/../files/' + testFiles.indexOf(file) + '.txt', file);
-    })
-  })
-  it('should return data in the correct order every time', (done) => {
-    let result = readFile(testFilePaths, fs.readFile, 'utf8', done);
-    expect(readFile(testFilePaths, fs.readFile, 'utf8')).to.eql('firststringmoredatalotsofdata');
+
+  before('reading files' , (done) => {
+
+    emitter.on('readFile', (data, index) => {
+      fileArr.push(data);
+      if (fileArr.length === filePaths.length) {
+        fileString = fileArr.join('');
+        done();
+      }
+    });
+
+    fs.readFile(filePaths[0], (err, data) => {
+      emitter.emit('readFile', data.toString('utf8', 0, 8));
+      fs.readFile(filePaths[1], (err, data) => {
+        emitter.emit('readFile', data.toString('utf8', 0, 8));
+        fs.readFile(filePaths[2], (err, data) => {
+          emitter.emit('readFile', data.toString('utf8', 0, 8));
+        });
+      });
+    });
+  });
+
+  it('should return data in the correct order', () => {
+    expect(fileString).to.eql('Per te pLorem ipCan dis ');
   });
 });

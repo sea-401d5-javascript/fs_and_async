@@ -1,20 +1,27 @@
 'use strict'
 
 const fs = require('fs');
-const async = require('async');
+const eventEmitter = require('events');
+const emitter = new eventEmitter();
 const filePaths = ['./files/one.txt', './files/two.txt', './files/three.txt'];
+let fileArr = [];
 
-let readFiles = module.exports = function(filePaths, fn, encoding, cb) {
-  let files = '';
-  async.map(filePaths, fn, function(err, file) {
-    if (err) console.log(err);
-    file.forEach((buffer) => {
-      files += buffer.toString(encoding, 0, 8);
+emitter.on('readFile', (data, index) => {
+  fileArr.push(data);
+  if (fileArr.length === filePaths.length) {
+    console.log(fileArr.join(''));
+  }
+});
+
+function readFiles() {
+  fileArr = [];
+  fs.readFile(filePaths[0], (err, data) => {
+    emitter.emit('readFile', data.toString('utf8', 0, 8));
+    fs.readFile(filePaths[1], (err, data) => {
+      emitter.emit('readFile', data.toString('utf8', 0, 8));
+      fs.readFile(filePaths[2], (err, data) => {
+        emitter.emit('readFile', data.toString('utf8', 0, 8));
+      });
     });
-    console.log('within function', files);
-    if (cb) done();
-    return files;
   });
-}
-
-// readFiles(filePaths, fs.readFile, 'hex');
+};
