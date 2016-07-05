@@ -17,7 +17,7 @@ describe('text test', () => {
       });
       fs.readFile(__dirname + '/../three.txt', (err, data) =>{
         testFiles.push('three.txt: ' + data.toString('hex', 0, 8));
-        (done);
+        done();
       });
     });
   });
