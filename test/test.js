@@ -1,9 +1,29 @@
-const expect = require('chai').expect
-const text = require('../file-async')
+'use strict';
+const expect = require('chai').expect;
+const fs = require('fs');
+const reader = require('../file-async.js');
+
+
 
 describe('text test', () => {
-  it('test should log first 8 bites', (done) => {
-    expect(text()).to.eql('hex');
-    done();
-  })
-})
+  let testFiles = [];
+
+  before((done)=> {
+    fs.readFile(__dirname + '/../one.txt', (err,data) => {
+      testFiles.push('one.txt: ' + data.toString('hex', 0, 8));
+      fs.readFile(__dirname + '/../two.txt', (err, data) => {
+        testFiles.push('two.txt: ' + data.toString('hex', 0, 8));
+
+      });
+      fs.readFile(__dirname + '/../three.txt', (err, data) =>{
+        testFiles.push('three.txt: ' + data.toString('hex', 0, 8));
+        (done);
+      });
+    });
+  });
+  it('test should read order', () => {
+    reader((data)=>{
+      expect((data[0]).toString()).to.eql((testFiles[0].toString()));
+    });
+  });
+});
